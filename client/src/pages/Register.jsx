@@ -50,6 +50,11 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
 `;
+const Error = styled.span`
+  color: red;
+  font-size: 15px;
+  font-weight: 300;
+`;
 
 const Register = () => {
   const [fname, setFname] = useState("");
@@ -58,6 +63,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -73,6 +79,8 @@ const Register = () => {
         });
         navigate("/");
       } catch (err) {}
+    } else {
+      setError("Your password inputs do not match");
     }
   };
   return (
@@ -106,6 +114,7 @@ const Register = () => {
             placeholder="confirm password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          {error && <Error>{error}</Error>}
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
